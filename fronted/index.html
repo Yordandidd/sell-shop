@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shop</title>
+</head>
+<body>
+
+<h1>Shop</h1>
+
+<div id="products"></div>
+
+<script>
+const API = "https://DEIN-RENDER-URL";
+
+let sessionId = Math.random().toString(36);
+let isAdmin = false;
+
+async function load(){
+  let res = await fetch(API+"/products");
+  let data = await res.json();
+
+  document.getElementById("products").innerHTML =
+    data.map((p,i)=>`
+      <div>
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <b>${p.price}€</b>
+
+        ${isAdmin ? `<button onclick="del(${i})">Delete</button>` : ""}
+      </div>
+    `).join("");
+}
+
+async function login(){
+  await fetch(API+"/login",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      user:user.value,
+      pass:pass.value,
+      sessionId
+    })
+  });
+
+  isAdmin = true;
+  load();
+}
+
+async function add(){
+  await fetch(API+"/products",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      sessionId,
+      name:name.value,
+      price:price.value,
+      desc:desc.value
+    })
+  });
+
+  load();
+}
+
+async function del(i){
+  await fetch(API+"/products",{
+    method:"DELETE",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({sessionId,index:i})
+  });
+
+  load();
+}
+
+load();
+</script>
+
+</body>
+</html>
