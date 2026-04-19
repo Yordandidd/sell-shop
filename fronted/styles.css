@@ -1,0 +1,195 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #05010a;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: -2;
+
+  background:
+    radial-gradient(circle at 20% 30%, rgba(139,92,246,0.25), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(59,130,246,0.20), transparent 45%),
+    radial-gradient(circle at 50% 70%, rgba(168,85,247,0.18), transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(99,102,241,0.15), transparent 55%);
+
+  filter: blur(70px);
+  animation: floatBG 18s ease-in-out infinite;
+}
+
+/* smooth movement like MySellAuth */
+@keyframes floatBG {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-6%, -4%) scale(1.08);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* =========================
+   NOISE OVERLAY (premium feel)
+========================= */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background-image: url("https://www.transparenttextures.com/patterns/noise.png");
+  opacity: 0.05;
+}
+
+/* =========================
+   HEADER STYLE
+========================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+
+  background: rgba(10, 5, 20, 0.4);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(139,92,246,0.2);
+}
+
+/* =========================
+   BUTTONS (GLOW STYLE)
+========================= */
+button {
+  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+  font-weight: 600;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(139,92,246,0.4);
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
+
+/* =========================
+   PRODUCT CARDS
+========================= */
+.card {
+  background: rgba(10, 5, 20, 0.6);
+  border: 1px solid rgba(139,92,246,0.2);
+  border-radius: 16px;
+  padding: 20px;
+
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(139,92,246,0.5);
+  box-shadow: 0 0 30px rgba(59,130,246,0.15);
+}
+
+/* PRICE */
+.price {
+  margin-top: 10px;
+  color: #a78bfa;
+  font-size: 18px;
+}
+
+/* =========================
+   ADMIN PANEL (SIDEBAR)
+========================= */
+.admin {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 340px;
+  height: 100%;
+  padding: 20px;
+
+  background: rgba(10, 5, 20, 0.95);
+  border-left: 1px solid rgba(139,92,246,0.3);
+  backdrop-filter: blur(15px);
+
+  transition: 0.3s;
+}
+
+.admin.active {
+  right: 0;
+}
+
+/* INPUTS */
+input {
+  width: 100%;
+  margin: 6px 0;
+  padding: 10px;
+
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(139,92,246,0.2);
+  border-radius: 10px;
+  color: white;
+  outline: none;
+}
+
+input:focus {
+  border-color: rgba(139,92,246,0.6);
+  box-shadow: 0 0 10px rgba(139,92,246,0.2);
+}
+
+/* =========================
+   LOGIN MODAL
+========================= */
+.login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: rgba(10, 5, 20, 0.95);
+  padding: 25px;
+  border-radius: 16px;
+
+  border: 1px solid rgba(139,92,246,0.3);
+  backdrop-filter: blur(15px);
+
+  display: none;
+}
+
+/* SMALL GLOW ACCENT */
+.glow {
+  box-shadow: 0 0 25px rgba(139,92,246,0.15);
+}
